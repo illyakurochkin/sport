@@ -4,9 +4,9 @@ import {Icon, Item} from 'semantic-ui-react';
 class CoachCard extends Component {
   render() {
     const {coach, onClick} = this.props;
-    
+
     return (
-      <Item onClick={onClick}>
+      <Item onClick={onClick} style={{paddingBottom: 30, cursor: 'pointer'}}>
         <Item.Image onClick={onClick} size="small" src={coach.photo}/>
         <Item.Content>
           <Item.Header><a style={{cursor: 'pointer'}} onClick={onClick}>{coach.name}</a></Item.Header>

@@ -13,7 +13,7 @@ const fakeGetCoaches = () => new Promise(resolve => setTimeout(() => resolve([
   },
   {
     coachId: 34234232343,
-    name: 'Myronych Olegovych',
+    name: 'Myronych Olegovych Olegovych',
     phone: '+42389042384',
     age: 24,
     sportRang: 'super sportsman',
@@ -43,9 +43,9 @@ const fakeGetCoaches = () => new Promise(resolve => setTimeout(() => resolve([
 
 export const fetchCoaches = () => async dispatch => {
   // const body = gymId ? `gymId=${gymId}` : clientId ? `clientId=${clientId}` : '';
-  const {data} = await api.get(`/coaches`);
-  //const data = await fakeGetCoaches();
-  
+  // const {data} = await api.get(`/coaches`);
+  const data = await fakeGetCoaches();
+
   dispatch({
     type: FETCH_COACHES,
     coaches: data

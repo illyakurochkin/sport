@@ -19,6 +19,7 @@
     "react-scripts": "3.0.1",
     "react-time-range": "^1.0.4",
     "redux": "^4.0.1",
+    "redux-form": "^8.3.5",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.87.1",
     "styled-components": "^4.2.1"
