@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {Button, Menu as SemanticMenu} from 'semantic-ui-react';
 import {signin, signout} from '../../redux/actions/userActions';
-import {setPage} from '../../redux/actions/pageActions';
+import {Link, withRouter} from 'react-router-dom';
 
 const Container = styled.div`
   left: 50px;
@@ -55,52 +55,41 @@ const SemanticMenuContainer = styled.div`
 class Menu extends Component {
   onSignin = () => this.props.signin('username', 'password');
   onSignout = () => this.props.signout();
-  
+
   renderMenuItems() {
-    const {page, setPage, user: {userType}} = this.props;
-    
+    const {user: {userType}, location: {pathname}} = this.props;
+
     return (
       <SemanticMenuContainer>
         <SemanticMenu secondary vertical>
-          <SemanticMenu.Item
-            name="home"
-            active={page.name === 'home'}
-            onClick={() => setPage({name: 'home'})}
-          />
-          <SemanticMenu.Item
-            name="workouts"
-            active={page.name === 'workouts' || page.name === 'createWorkout'}
-            onClick={() => setPage({name: 'workouts'})}
-          />
-          <SemanticMenu.Item
-            name="coaches"
-            active={page.name === 'coaches' || page.name === 'coach'}
-            onClick={() => setPage({name: 'coaches'})}
-          />
-          <SemanticMenu.Item
-            name="gyms"
-            active={page.name === 'gyms' || page.name === 'gym'}
-            onClick={() => setPage({name: 'gyms'})}
-          />
+          <Link to="/home">
+            <SemanticMenu.Item name="home" active={pathname === '/home'}/>
+          </Link>
+          <Link to="/workouts">
+            <SemanticMenu.Item name="workouts" active={pathname === '/workouts' || pathname === '/create-workout'}/>
+          </Link>
+          <Link to="/coaches">
+            <SemanticMenu.Item name="coaches" active={pathname.startsWith('/coach')}/>
+          </Link>
+          <Link to="/gyms">
+            <SemanticMenu.Item name="gyms" active={pathname.startsWith('/gym')} />
+          </Link>
+
           {(userType === 'manager' || userType === 'coach') && (
-            <SemanticMenu.Item
-              name="clients"
-              active={page.name === 'clients' || page.name === 'client'}
-              onClick={() => setPage({name: 'clients'})}
-            />
+            <Link to="/clients">
+              <SemanticMenu.Item name="clients" active={pathname.startsWith('client')}/>
+            </Link>
           )}
           {userType === 'manager' && (
-            <SemanticMenu.Item
-              name="equipment"
-              active={page.name === 'equipment'}
-              onClick={() => setPage({name: 'equipment'})}
-            />
+            <Link to="/equipment">
+              <SemanticMenu.Item name="equipment" active={pathname === '/equipment'}/>
+            </Link>
           )}
         </SemanticMenu>
       </SemanticMenuContainer>
     )
   }
-  
+
   renderAuthContainer() {
     const {user} = this.props;
     console.log('user', user);
@@ -119,7 +108,7 @@ class Menu extends Component {
       </AuthContainer>
     );
   }
-  
+
   render() {
     return (
       <Container>
@@ -134,8 +123,9 @@ const mapStateToProps = state => {
   console.log('redux state', state);
   return {
     user: state.user,
-    page: state.page
   };
 };
 
-export default connect(mapStateToProps, {signin, signout, setPage})(Menu);
+const Connected = connect(mapStateToProps, {signin, signout})(Menu);
+
+export default withRouter(Connected);

@@ -12,7 +12,7 @@ const fakeGetWorkouts = () => new Promise(resolve => setTimeout(() => resolve([
       name: 'Pavliv Denis'
     },
     gym: {
-      gym_id: 4234234,
+      gymId: 4234234,
       address: 'Podil street 23A'
     },
     startTime: '5 May 15:00',

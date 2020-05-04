@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {Header} from 'semantic-ui-react';
 import {connect} from 'react-redux';
-import {setPage} from '../../../redux/actions/pageActions';
+import {withRouter} from 'react-router';
 
 const Container = styled.div`
   position: relative;
@@ -46,41 +46,46 @@ const Row = styled.div`
 
 class WorkoutCard extends Component {
   goToCoach = () => {
-    const {workout, userType, setPage} = this.props;
-    
+    const {workout, userType, history} = this.props;
+
     if (!workout.coach) {
       return;
     }
-    
+
     if (userType === 'coach') {
-      return setPage({name: 'home'});
+      return history.push('/home');
     }
-    setPage({name: 'coach',coachId: workout.coach.coachId});
+
+    return history.push(`/coaches/${workout.coach.coachId}`);
   };
-  
+
   goToGym = () => {
-    const {workout, userType, setPage} = this.props;
+    const {workout, userType, history} = this.props;
+
     if (userType === 'manager') {
-      return setPage({name: 'home'});
+      return history.push('/home');
     }
-    setPage({name: 'gym', gymId: workout.gym.gymId});
+
+    console.log('go to gym', workout.gym);
+
+    return history.push(`/gyms/${workout.gym.gymId}`);
   };
-  
+
   goToClient = () => {
-    console.log('go to client');
-    const {workout, userType, setPage} = this.props;
+    const {workout, userType, history} = this.props;
     if (userType === 'client') {
-      return setPage({name: 'home'});
+      return history.push('/home');
     }
-    
-    console.log('clientId --- ', workout.client.clientId);
-    setPage({name: 'client', clientId: workout.client.clientId});
+
+    return history.push(`/clients/${workout.client.clientId}`);
   };
-  
+
   render() {
     const {workout} = this.props;
+
+    console.log('workout', workout);
     const {client, coach, gym, startTime, endTime, price, date} = workout;
-    
+
     return (
       <Container>
         <LinksContainer>
@@ -103,11 +108,13 @@ class WorkoutCard extends Component {
 
 WorkoutCard.propTypes = {
   workout: PropTypes.object.isRequired,
-  userType: PropTypes.string.isRequired
+  userType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  userType: state.user.userType
+  userType: state.user.userType,
 });
 
-export default connect(mapStateToProps, {setPage})(WorkoutCard);
+const Connected = connect(mapStateToProps)(WorkoutCard);
+
+export default withRouter(Connected);

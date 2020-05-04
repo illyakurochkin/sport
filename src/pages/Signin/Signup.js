@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {useDispatch} from 'react-redux';
 import {Button, Form, Header} from 'semantic-ui-react';
 import styled from 'styled-components';
-import api from '../../utils/api';
-import PropTypes from 'prop-types';
 import {Field, reduxForm} from 'redux-form';
 import {signup} from '../../redux/actions/userActions';
+import {withRouter} from 'react-router';
 
 const Container = styled.div`
   margin: 60px auto;
@@ -37,9 +36,9 @@ const Divider = styled.div`
 
 const input = styled.input``;
 
-const Signup = ({goBack, handleSubmit}) => {
+const Signup = ({handleSubmit, history}) => {
   const dispatch = useDispatch();
-  const onSubmit = (params) => dispatch(signup(params)).then(goBack);
+  const onSubmit = (params) => dispatch(signup(params));
 
   return (
     <Container>
@@ -94,16 +93,13 @@ const Signup = ({goBack, handleSubmit}) => {
         </ButtonContainer>
 
         <p align="center">
-          Already have an account? <a color="primary" onClick={goBack} style={{textDecoration: 'underline'}}>Sign In</a>
+          Already have an account? <a color="primary" onClick={() => history.push('/login')} style={{textDecoration: 'underline'}}>Sign In</a>
         </p>
       </StyledForm>
     </Container>
   );
 };
 
+const Connected = reduxForm({form: 'SignUp'})(Signup);
 
-Signup.propTypes = {
-  goBack: PropTypes.func.isRequired,
-};
-
-export default reduxForm({form: 'SignUp'})(Signup);
+export default withRouter(Connected);

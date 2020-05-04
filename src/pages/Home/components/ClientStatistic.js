@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {Header} from 'semantic-ui-react';
-import {connect} from 'react-redux';
-import {setPage} from '../../../redux/actions/pageActions';
+import {withRouter} from 'react-router-dom';
 
 const Container = styled.div``;
 
@@ -23,13 +22,13 @@ const ScrollContainer = styled.div`
 `;
 
 class ClientStatistic extends Component {
-  goToWorkouts = () => this.props.setPage({name: 'workouts'});
-  goToGym = (gymId) => this.props.setPage({name: 'gym', gymId});
-  goToCoach = (coachId) => this.props.setPage({name: 'coach', coachId});
-  
+  goToWorkouts = () => this.props.history.push('/workouts');
+  goToGym = (gymId) => this.props.history.push(`/gyms/${gymId}`);
+  goToCoach = (coachId) => this.props.history.push(`/coaches/${coachId}`);
+
   render() {
     const {statistic} = this.props;
-    
+
     return (
       <Container>
         <Header as="h2">Statistic</Header>
@@ -61,7 +60,7 @@ class ClientStatistic extends Component {
 }
 
 ClientStatistic.propTypes = {
-  statistic: PropTypes.object.isRequired
+  statistic: PropTypes.object.isRequired,
 };
 
-export default connect(null, {setPage})(ClientStatistic);
+export default withRouter(ClientStatistic);

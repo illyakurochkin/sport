@@ -9,7 +9,7 @@ import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import api from '../../utils/api';
-import {setPage} from '../../redux/actions/pageActions';
+import {withRouter} from 'react-router-dom';
 
 const StepContainer = styled.div`
   padding: 30px;
@@ -76,7 +76,7 @@ const CloseButton = styled(Button).attrs({
 
 class CreateWorkout extends Component {
   state = {
-    coach: null,
+    coach: this.props.coach,
     gym: this.props.gym,
     date: null,
     time: ['10:00', '11:00'],
@@ -84,11 +84,11 @@ class CreateWorkout extends Component {
     loading: false,
     withCoach: false
   };
-  
+
   renderCoachList(coaches) {
     const {coach} = this.state;
-    
-    
+
+
     return coaches.map(c => (
       <CoachName
         selected={coach && coach.coachId === c.coachId}
@@ -97,13 +97,13 @@ class CreateWorkout extends Component {
       >{c.name}</CoachName>
     ));
   }
-  
+
   renderCoachStep(n) {
     const {coach, coaches, loading} = this.state;
     console.log('coach', this.state);
     console.log('renderCoach step Q)(*#$)(#@*$(#@$*@#)$*#)@$*&#@');
     console.log('state', this.state);
-    
+
     return (
       <StepContainer>
         <Row>
@@ -125,10 +125,10 @@ class CreateWorkout extends Component {
       </StepContainer>
     )
   }
-  
+
   renderGymStep(n) {
     const {gym} = this.state;
-    
+
     return (
       <StepContainer>
         <Row>
@@ -152,10 +152,10 @@ class CreateWorkout extends Component {
       </StepContainer>
     )
   }
-  
+
   renderDateStep(n) {
     const {date, time} = this.state;
-    
+
     return (
       <StepContainer>
         <Row>
@@ -181,33 +181,33 @@ class CreateWorkout extends Component {
       </StepContainer>
     );
   }
-  
+
   onWithCoachClick = () => {
     console.log('on with coach click');
     const {gym, date, time} = this.state;
-    
+
     if (!(date && time && gym)) {
       console.log('data', date, 'time', time, 'gym', gym);
       return;
     }
-    
+
     const withCoach = !this.state.withCoach;
-    
+
     const d = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
     const m = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : (date.getMonth() + 1);
     const year = date.getFullYear();
-    
+
     const dateString = `${d}.${m}.${year}`;
-    
-    
+
+
     this.setState({withCoach});
-    
+
     if (withCoach) {
       console.log('with coach');
       const [start, end] = time;
-      
+
       this.setState({loading: true});
-      
+
       api.get(`/availableCoaches`, {
         params: {
           gymId: gym.gymId,
@@ -219,37 +219,37 @@ class CreateWorkout extends Component {
       .then(response => this.setState({loading: false, coaches: response.data}));
     }
   };
-  
+
   onCreateWorkout = () => {
-    const {setPage} = this.props;
-    
+    const {history} = this.props;
+
     const {gym, date, time, withCoach, coach} = this.state;
-    
+
     if (!gym || !date || !time || (withCoach && !coach)) {
       return;
     }
-    
+
     const d = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
     const m = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : (date.getMonth() + 1);
     const year = date.getFullYear();
     //yyyy-MM-dd'T'HH:mm:ssZ
     const dateString = `${year}.${m}.${d} ${time[0].toString()}:00`;
     //const dateString = `${d}.${m}.${year}`;
-    
+
     api.get('/workout', {params:{
       gymId: gym.gymId,
       dateStart: dateString,
       startTime: time[0].toString() + ':00',
       endTime: time[1].toString() + ':00',
       coachId: coach && coach.coachId
-    }}).then(response => setPage({name: 'workouts'}));
-    
+    }}).then(response => history.push('/workouts'));
+
   };
-  
+
   render() {
     const {withCoach, loading, coaches} = this.state;
     console.log('---state---', this.state);
-    
+
     return (
       <div>
         <Header as="h1">Create Workout</Header>
@@ -272,8 +272,12 @@ class CreateWorkout extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {client: state.user.userData};
+const mapStateToProps = (state) => {
+  return {
+    client: state.user,
+  };
 };
 
-export default connect(mapStateToProps, {setPage})(CreateWorkout);
+const Connected = connect(mapStateToProps)(CreateWorkout);
+
+export default withRouter(Connected);

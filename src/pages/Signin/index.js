@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Button, Form, Header} from 'semantic-ui-react';
-import {setPage} from '../../redux/actions/pageActions';
 import {signin} from '../../redux/actions/userActions';
-import Signup from './Signup';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
+import {Field, reduxForm} from 'redux-form';
 
 const Container = styled.div`
   margin: 60px auto;
@@ -29,60 +30,43 @@ const StyledButton = styled(Button)`
   margin: 0 auto;
 `;
 
-class Signin extends Component {
-  state = {username: '', password: '', showSignUp: false};
+const input = styled.input``;
 
-  onSubmit = () => {
-    const {signin, setPage} = this.props;
-    const {username, password} = this.state;
+const Signin = ({handleSubmit, history}) => {
+  const dispatch = useDispatch();
 
-    signin(username, password)
-    .then(user => setPage({name: 'home', user}));
+  const onSubmit = ({username, password}) => {
+    dispatch(signin(username, password))
+      .then(() => history.push('/home'));
   };
 
-  render() {
-    const {username, password} = this.state;
-    console.log('state', this.state);
+  return (
+    <Container>
+      <Header as="h1">Sign In</Header>
+      <StyledForm onSubmit={handleSubmit(onSubmit)}>
+        <Form.Field>
+          <label>Username</label>
+          <Field name="username" placeholder='username' component={input}/>
+        </Form.Field>
+        <Form.Field>
+          <label>Password</label>
+          <Field name="password" type="password" placeholder='******' component={input}/>
+        </Form.Field>
+        <ButtonContainer>
+          <StyledButton primary type='submit'>Submit</StyledButton>
+        </ButtonContainer>
+        <p align="center">
+          {'Don\'t have an account? '}
+          <Link
+            to="/signup"
+            color="primary"
+            style={{textDecoration: 'underline', cursor: 'pointer'}}
+          >Sign Up</Link></p>
+      </StyledForm>
+    </Container>
+  );
+};
 
-    if(this.state.showSignUp) {
-      return <Signup goBack={() => this.setState({showSignUp: false})}/>
-    }
+const Connected = reduxForm({form: 'signIn'})(Signin);
 
-    return (
-      <Container>
-        <Header as="h1">Sign In</Header>
-        <StyledForm onSubmit={this.onSubmit}>
-          <Form.Field>
-            <label>Username</label>
-            <input
-              value={username}
-              onChange={e => this.setState({username: e.target.value})}
-              placeholder='username'
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Password</label>
-            <input
-              value={password}
-              onChange={e => this.setState({password: e.target.value})}
-              type="password"
-              placeholder='******'
-            />
-          </Form.Field>
-          <ButtonContainer>
-            <StyledButton primary type='submit'>Submit</StyledButton>
-          </ButtonContainer>
-          <p align="center">
-            {'Don\'t have an account? '}
-            <a
-              color="primary"
-              onClick={() => this.setState({showSignUp: true})}
-              style={{textDecoration: 'underline', cursor: 'pointer'}}
-            >Sign Up</a></p>
-        </StyledForm>
-      </Container>
-    );
-  }
-}
-
-export default connect(null, {signin, setPage})(Signin);
+export default withRouter(Connected);

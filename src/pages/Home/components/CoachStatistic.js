@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {Header} from 'semantic-ui-react';
-import {connect} from 'react-redux';
-import {setPage} from '../../../redux/actions/pageActions';
+import {withRouter} from 'react-router-dom';
 
 const Row = styled.div`
   display: flex;
@@ -17,13 +16,12 @@ const ScrollContainer = styled.div`
 `;
 
 class CoachStatistic extends Component {
-  goToWorkouts = () => this.props.setPage({name: 'workouts'});
-  goToGym = (gymId) => this.props.setPage({name: 'gym', gymId});
-  goToClient = (clientId) => this.props.setPage({name: 'client', clientId});
-  
+  goToWorkouts = () => this.props.history.push('/workouts');
+  goToClient = (clientId) => this.props.history.push(`/clients/${clientId}`);
+
   render() {
     const {statistic} = this.props;
-    
+
     return (
       <div>
         <Row>
@@ -45,4 +43,4 @@ CoachStatistic.propTypes = {
   statistic: PropTypes.object.isRequired
 };
 
-export default connect(null, {setPage})(CoachStatistic);
+export default withRouter(CoachStatistic);

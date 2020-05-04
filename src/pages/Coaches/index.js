@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import {Header} from 'semantic-ui-react';
 import CoachCard from './components/CoachCard';
 import Search from '../components/Search';
-import {setPage} from '../../redux/actions/pageActions';
 import {fetchCoaches} from '../../redux/actions/coachesActions';
 import _ from 'lodash';
+import {withRouter} from 'react-router-dom';
 
 const List = styled.div`
   margin-top: 30px;
@@ -35,18 +35,18 @@ class Coaches extends Component {
   }
 
   renderCards() {
-    const {coaches, setPage} = this.props;
+    const {coaches, history} = this.props;
     const {query} = this.state;
 
     return coaches && coaches
-    .filter(coach => search(coach, query))
-    .map(coach => (
-      <CoachCard
-        key={coach.coachId}
-        coach={coach}
-        onClick={() => setPage({name: 'coach', coachId: coach.coachId})}
-      />
-    ));
+      .filter(coach => search(coach, query))
+      .map(coach => (
+        <CoachCard
+          key={coach.coachId}
+          coach={coach}
+          onClick={() => history.push(`/coaches/${coach.coachId}`)}
+        />
+      ));
   }
 
   render() {
@@ -65,7 +65,9 @@ class Coaches extends Component {
 }
 
 const mapStateToProps = state => ({
-  coaches: state.coaches
+  coaches: state.coaches,
 });
 
-export default connect(mapStateToProps, {setPage, fetchCoaches})(Coaches);
+const Connected = connect(mapStateToProps, {fetchCoaches})(Coaches);
+
+export default withRouter(Connected);

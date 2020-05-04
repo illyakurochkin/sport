@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import {Header} from 'semantic-ui-react';
-import {setPage} from '../../../redux/actions/pageActions';
-import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -20,11 +19,11 @@ const ScrollBox = styled.div`
 `;
 
 class GymStatistic extends Component {
-  goToClient = clientId => this.props.setPage({name: 'client', clientId});
-  
+  goToClient = clientId => this.props.history.push(`/clients/${clientId}`);
+
   render() {
     const {statistic} = this.props;
-    
+
     return (
       <Container>
         <Header as="h3" color="primary">Clients</Header>
@@ -48,7 +47,7 @@ class GymStatistic extends Component {
 }
 
 GymStatistic.propTypes = {
-  statistic: PropTypes.object.isRequired
+  statistic: PropTypes.object.isRequired,
 };
 
-export default connect(null, {setPage})(GymStatistic);
+export default withRouter(GymStatistic);

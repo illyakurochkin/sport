@@ -5,7 +5,6 @@ import {Header, Item} from 'semantic-ui-react';
 import GymCard from './components/GymCard';
 import Search from '../components/Search';
 import {fetchGyms} from '../../redux/actions/gymsActions';
-import {setPage} from '../../redux/actions/pageActions';
 import _ from 'lodash';
 
 const List = styled(Item.Group)`
@@ -14,7 +13,7 @@ const List = styled(Item.Group)`
 
 const search = (gym, query) => {
   const q = (query && query.toLowerCase().trim()) || '';
-  
+
   return gym && (_.get(gym, 'address', '').toLowerCase().includes(q) ||
     _.get(gym, 'description', '').toLowerCase().includes(q) ||
     _.get(gym, 'phone', '').toLowerCase().includes(q) ||
@@ -23,28 +22,28 @@ const search = (gym, query) => {
 
 class Gyms extends Component {
   state = {query: ''};
-  
+
   componentDidMount() {
     this.props.fetchGyms();
   }
-  
+
   renderCards() {
-    const {gyms, setPage} = this.props;
+    const {gyms, history} = this.props;
     const {query} = this.state;
-    
+
     return gyms && gyms.filter(gym => search(gym, query))
     .map(gym => (
       <GymCard
         key={gym.gymId}
         gym={gym}
-        onClick={() => setPage({name: 'gym', gymId: gym.gymId})}
+        onClick={() => history.push(`/gyms/${gym.gymId}`)}
       />
     ));
   }
-  
+
   render() {
     const {query} = this.state;
-    
+
     return (
       <div>
         <Header as="h1">Gyms</Header>
@@ -57,9 +56,6 @@ class Gyms extends Component {
   }
 }
 
-const mapStateToProps = ({page, gyms}) => ({
-  page,
-  gyms
-});
+const mapStateToProps = ({gyms}) => ({gyms});
 
-export default connect(mapStateToProps, {fetchGyms, setPage})(Gyms);
+export default connect(mapStateToProps, {fetchGyms})(Gyms);
