@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4db4f656-bb8c-4df8-b440-70fdf49550e8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Client/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Client/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Clients/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Clients/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Coach/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Coach/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Coaches/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Coaches/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/CreateWorkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/CreateWorkout/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Gym/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Gym/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Gyms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Gyms/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/components/ClientStatistic.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/components/ClientStatistic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/components/CoachStatistic.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/components/CoachStatistic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Home/components/GymStatistic.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Home/components/GymStatistic.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/PageManager.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Signin/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signin/Signup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Signin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Signin/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Workouts/components/WorkoutCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Workouts/components/WorkoutCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/Workouts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/Workouts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/components/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/components/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/actionsTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/actionsTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/pageActions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/actions/workoutsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/actions/workoutsActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/reducers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/reducers/pageReducer.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="4db4f656-bb8c-4df8-b440-70fdf49550e8" name="Default Changelist" comment="" />
     <list id="34b93f37-f20f-42d6-9655-36c897e0170f" name="Lot's of fixes and improvements" comment="Lot's of fixes and improvements&#10;&#10;(cherry picked from commit a6b4c1f179eaba1e1e06936be5982b7daf96398c)">
       <changelist_data name="illyakurochkin" email="illya.kurochkin@gmail.com" date="1560540916000" />
     </list>
@@ -79,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pages/Signin/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+            <state relative-caret-position="150">
+              <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -229,7 +202,7 @@
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
     <option name="width" value="1440" />
     <option name="height" value="900" />
   </component>
@@ -543,14 +516,7 @@
       <workItem from="1588245698867" duration="4199000" />
       <workItem from="1588494910240" duration="3594000" />
       <workItem from="1588519341843" duration="4858000" />
-      <workItem from="1588570326927" duration="1535000" />
-    </task>
-    <task id="LOCAL-00104" summary="Lot's of fixes and improvements&#10;&#10;(cherry picked from commit a6b4c1f179eaba1e1e06936be5982b7daf96398c)">
-      <created>1560797602803</created>
-      <option name="number" value="00104" />
-      <option name="presentableId" value="LOCAL-00104" />
-      <option name="project" value="LOCAL" />
-      <updated>1560797602803</updated>
+      <workItem from="1588570326927" duration="2445000" />
     </task>
     <task id="LOCAL-00105" summary="Lot's of fixes and improvements&#10;&#10;(cherry picked from commit a6b4c1f179eaba1e1e06936be5982b7daf96398c)">
       <created>1560797695930</created>
@@ -888,15 +854,21 @@
       <option name="project" value="LOCAL" />
       <updated>1588515863442</updated>
     </task>
-    <option name="localTasksCounter" value="153" />
+    <task id="LOCAL-00153" summary="Use router">
+      <created>1588572561310</created>
+      <option name="number" value="00153" />
+      <option name="presentableId" value="LOCAL-00153" />
+      <option name="project" value="LOCAL" />
+      <updated>1588572561311</updated>
+    </task>
+    <option name="localTasksCounter" value="154" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136772000" />
+    <option name="totallyTimeSpent" value="137682000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.53151864" visible="true" weight="0.19943622" />
       <window_info id="Structure" order="1" sideWeight="0.4276923" side_tool="true" weight="0.24524313" />
@@ -980,7 +952,8 @@
     <MESSAGE value="Fix some shit" />
     <MESSAGE value="Implement SignUp" />
     <MESSAGE value="Start refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Start refactoring" />
+    <MESSAGE value="Use router" />
+    <option name="LAST_COMMIT_MESSAGE" value="Use router" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/pages/Gyms/components/GymCard.js">
@@ -1398,8 +1371,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pages/Signin/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="19" lean-forward="true" selection-start-line="18" selection-start-column="19" selection-end-line="18" selection-end-column="19" />
+        <state relative-caret-position="150">
+          <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
