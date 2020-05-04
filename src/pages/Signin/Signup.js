@@ -75,7 +75,7 @@ const Signup = ({handleSubmit, history}) => {
 
         <Form.Field>
           <label>Birth date</label>
-          <Field name="birthDate" type="text" placeholder='yyyy.mm.dd' component={input}/>
+          <Field name="birthDate" type="text" placeholder='yyyy-mm-dd' component={input}/>
         </Form.Field>
 
         <Form.Field>

@@ -33,20 +33,24 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const signin = (username, password) => async dispatch => {
-  const {data: {access_token}} = await api.get('/oauth/token', {params: {username, password}});
+  const {data: {access_token}} = await api.get('/oauth/token', {
+    headers: {Authorization: 'Base Z3ltLXZpZXc6c2VjcmV0'},
+    params: {
+      username,
+      password,
+    }
+  });
   localStorage.setItem('authToken', access_token);
   await dispatch(fetchUser());
 };
 
 export const signup = (params) => async dispatch => {
-  console.log('params', params);
   await api.post('/api/signin', {...params});
   await dispatch(signin(params.email, params.password));
 };
 
 
 export const signout = () => {
-  console.log('signout');
   api.defaults.headers.common.Authorization = null;
   localStorage.setItem('authToken', null);
   return ({type: SIGNOUT});

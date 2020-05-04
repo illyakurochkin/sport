@@ -182,7 +182,6 @@ class CreateWorkout extends Component {
     const {gym, date, time} = this.state;
 
     if (!(date && time && gym)) {
-      console.log('data', date, 'time', time, 'gym', gym);
       return;
     }
 
@@ -226,16 +225,18 @@ class CreateWorkout extends Component {
     const m = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : (date.getMonth() + 1);
     const year = date.getFullYear();
     //yyyy-MM-dd'T'HH:mm:ssZ
-    const dateString = `${year}.${m}.${d} ${time[0].toString()}:00`;
-    //const dateString = `${d}.${m}.${year}`;
+    // const dateString = `${year}-${m}-${d} ${time[0].toString()}:00`;
+    const dateString = `${year}.${m}.${d}`;
 
-    api.post('/api/workouts', {params:{
-      gymId: gym.gymId,
-      dateStart: dateString,
-      startTime: time[0].toString() + ':00',
-      endTime: time[1].toString() + ':00',
-      coachId: coach && coach.coachId
-    }}).then(() => history.push('/workouts'));
+    api.post('/api/workouts', {}, {
+      params: {
+        gymId: gym.gymId,
+        dateStart: dateString,
+        startTime: time[0].toString() + ':00',
+        endTime: time[1].toString() + ':00',
+        coachId: coach && coach.coachId
+      },
+    }).then(() => history.push('/workouts'));
 
   };
 
