@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import {Header} from 'semantic-ui-react';
-import CoachCard from './components/CoachCard';
+import CoachCard from './CoachCard';
 import Search from '../components/Search';
 import {fetchCoaches} from '../../redux/actions/coachesActions';
 import _ from 'lodash';
@@ -64,9 +64,7 @@ class Coaches extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  coaches: state.coaches,
-});
+const mapStateToProps = state => ({coaches: state.coaches});
 
 const Connected = connect(mapStateToProps, {fetchCoaches})(Coaches);
 

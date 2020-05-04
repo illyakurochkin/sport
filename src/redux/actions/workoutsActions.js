@@ -56,8 +56,8 @@ const fakeGetWorkouts = () => new Promise(resolve => setTimeout(() => resolve([
 ]), 100));
 
 export const fetchWorkouts = () => async dispatch => {
-  const data = await fakeGetWorkouts();
-  // const {data} = await api.get('/workouts');
+  // const data = await fakeGetWorkouts();
+  const {data} = await api.get('/api/workouts');
 
   dispatch({
     type: FETCH_WORKOUTS,

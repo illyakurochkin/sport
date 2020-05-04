@@ -65,7 +65,7 @@ const Signup = ({handleSubmit, history}) => {
 
         <Form.Field>
           <label>Last name</label>
-          <Field name="firstName" type="text" placeholder="Petrenko" component={input}/>
+          <Field name="lastName" type="text" placeholder="Petrenko" component={input}/>
         </Form.Field>
 
         <Form.Field>

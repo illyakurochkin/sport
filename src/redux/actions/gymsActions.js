@@ -70,8 +70,8 @@ const fakeGetGyms = () => new Promise(resolve => setTimeout(() => resolve([
 ]), 500));
 
 export const fetchGyms = () => async dispatch => {
-  // const {data} = await api.get('/gyms');
-  const data = await fakeGetGyms();
+  const {data} = await api.get('/api/gyms');
+  // const data = await fakeGetGyms();
 
   dispatch({
     type: FETCH_GYMS,

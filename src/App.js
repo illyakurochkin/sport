@@ -43,7 +43,6 @@ class App extends Component {
             <Switch>
               {user ? (
                 <Fragment>
-                  <Route exact path="/home" component={Home}/>
                   <Route exact path="/workouts" component={Workouts}/>
                   <Route exact path="/coaches" component={Coaches}/>
                   <Route exact path="/gyms" component={Gyms}/>
@@ -53,7 +52,7 @@ class App extends Component {
                   <Route exact path="/coaches/:id" component={Coach}/>
                   <Route exact path="/clients/:id" component={Client}/>
                   <Route exact path="/create-workout" component={CreateWorkout}/>
-                  <Route path="*" render={() => <Redirect to="/home" />} />
+                  <Route path="*" render={() => <Redirect to="/gyms" />} />
                 </Fragment>
               ) : (
                 <Fragment>

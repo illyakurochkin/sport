@@ -53,11 +53,10 @@ const SemanticMenuContainer = styled.div`
 `;
 
 class Menu extends Component {
-  onSignin = () => this.props.signin('username', 'password');
   onSignout = () => this.props.signout();
 
   renderMenuItems() {
-    const {user: {userType}, location: {pathname}} = this.props;
+    const {user: {authorities: [{authority: userType}]}, location: {pathname}} = this.props;
 
     return (
       <SemanticMenuContainer>
@@ -75,14 +74,9 @@ class Menu extends Component {
             <SemanticMenu.Item name="gyms" active={pathname.startsWith('/gym')} />
           </Link>
 
-          {(userType === 'manager' || userType === 'coach') && (
+          {(userType === 'COACH') && (
             <Link to="/clients">
               <SemanticMenu.Item name="clients" active={pathname.startsWith('client')}/>
-            </Link>
-          )}
-          {userType === 'manager' && (
-            <Link to="/equipment">
-              <SemanticMenu.Item name="equipment" active={pathname === '/equipment'}/>
             </Link>
           )}
         </SemanticMenu>
@@ -90,20 +84,36 @@ class Menu extends Component {
     )
   }
 
+  getName() {
+    const {user} = this.props;
+
+    if(user.coach) {
+      return `${user.coach.lastName} ${user.coach.firstName} ${user.coach.middlename}`;
+    }
+
+    if(user.gym) {
+      return `${user.gym.address}`;
+    }
+
+    if(user.client) {
+      return `${user.client.lastName} ${user.client.firstName} ${user.client.middlename}`;
+    }
+
+    return '###';
+  }
+
   renderAuthContainer() {
     const {user} = this.props;
-    console.log('user', user);
+
     return (
       <AuthContainer>
-        {user && (
-          <AuthInfo>
-            <UserType>{user.userType}</UserType>
-            <p>{user.userData.name ? user.userData.name : user.userData.address}</p>
-          </AuthInfo>
-        )}
+        <AuthInfo>
+          <UserType>{user.authorities[0].authority}</UserType>
+          <p>{this.getName()}</p>
+        </AuthInfo>
         <AuthButton
-          content={user ? 'sign out' : 'sign in'}
-          onClick={() => user ? this.onSignout() : this.onSignin()}
+          content='sign out'
+          onClick={this.onSignout}
         />
       </AuthContainer>
     );
@@ -119,12 +129,7 @@ class Menu extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('redux state', state);
-  return {
-    user: state.user,
-  };
-};
+const mapStateToProps = state => ({user: state.user});
 
 const Connected = connect(mapStateToProps, {signin, signout})(Menu);
 

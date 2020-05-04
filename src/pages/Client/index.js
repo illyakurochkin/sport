@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import MainClientInfo from './components/MainClientInfo';
+import MainClientInfo from './MainClientInfo';
 import api from '../../utils/api';
 import {withRouter} from 'react-router-dom';
 
@@ -15,7 +15,7 @@ class Client extends Component {
 
     const clientId = pathname.substring('/clients/'.length);
 
-    api.get('/client', {params: {id: clientId}})
+    api.get(`/api/clients/${clientId}`)
     .then(response => this.setState({client: response.data.client}));
   }
 

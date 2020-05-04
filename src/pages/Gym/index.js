@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import MainGymInfo from './components/MainGymInfo';
+import MainGymInfo from './MainGymInfo';
 import api from '../../utils/api';
 import {withRouter} from 'react-router-dom';
 
@@ -11,22 +11,17 @@ class Gym extends Component {
 
   componentDidMount() {
     const {location: {pathname}} = this.props;
-
     const gymId = pathname.substring('/gyms/'.length);
-    
-    console.log('this.props.location', this.props.location);
-    console.log('gymId', gymId);
 
-    api.get('/gym', {params: {id: gymId}})
+    api.get(`/api/gyms`, {params: {id: gymId}})
       .then(response => this.setState({
-        gym: response.data.gym,
-        timetables: response.data.coaches,
-        statistic: response.data.statistic,
+        gym: response.data,
+        timetables: response.data.timetables,
       }));
   }
 
   render() {
-    const {gym, statistic, timetables} = this.state;
+    const {gym, timetables} = this.state;
 
     if (!gym) {
       return null;
@@ -34,11 +29,7 @@ class Gym extends Component {
 
     return (
       <Container>
-        <MainGymInfo
-          gym={gym}
-          timetables={timetables}
-          statistic={statistic}
-        />
+        <MainGymInfo gym={gym} timetables={timetables}/>
       </Container>
     )
   }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Button, Header} from 'semantic-ui-react';
 import {connect} from 'react-redux';
 import {fetchWorkouts} from '../../redux/actions/workoutsActions';
-import WorkoutCard from './components/WorkoutCard';
+import WorkoutCard from './WorkoutCard';
 import {withRouter} from 'react-router-dom';
 
 class Workouts extends Component {

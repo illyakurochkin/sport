@@ -6,7 +6,7 @@ import Carousel from 'nuka-carousel';
 import GymStatistics from './GymStatistics';
 import {Button} from 'semantic-ui-react';
 import Modal from 'react-modal';
-import EquipmentCard from '../../EquipmentList/components/EquipmentCard';
+import EquipmentCard from '../EquipmentList/EquipmentCard';
 
 const Container = styled.div``;
 
@@ -34,15 +34,15 @@ const settings = {
 
 class MainGymInfo extends Component {
   state = {modalIsOpen: false};
-  
+
   openModal = () => this.setState({modalIsOpen: true});
-  
+
   closeModal = () => this.setState({modalIsOpen: false});
-  
+
   renderModal() {
     const {gym} = this.props;
     const {modalIsOpen} = this.state;
-    
+
     return (
       <Modal
         isOpen={modalIsOpen}
@@ -63,11 +63,11 @@ class MainGymInfo extends Component {
       </Modal>
     )
   }
-  
-  
+
+
   render() {
     const {gym, timetables} = this.props;
-    
+
     return (
       <Container>
         <Header as="h1">{gym.address}</Header>

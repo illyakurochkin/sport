@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import Timetable from '../../../pages/components/Timetable';
+import Timetable from '../components/Timetable';
 import {Header} from 'semantic-ui-react';
 
 const Container = styled.div`
@@ -36,13 +36,13 @@ const TimetableContainer = styled.div`
 
 class CoachesTimetable extends Component {
   state = {currentCoachId: _.get(this.props.timetables[0], 'coach.coachId')};
-  
+
   renderList() {
     const {timetables} = this.props;
     const {currentCoachId} = this.state;
-    
+
     const coaches = timetables.map(row => row.coach);
-    
+
     return coaches.map(coach => (
       <a
         onClick={() => this.setState({currentCoachId: coach.coachId})}
@@ -59,17 +59,17 @@ class CoachesTimetable extends Component {
       </a>
     ))
   }
-  
+
   renderTimetable() {
     const {timetables} = this.props;
     const {currentCoachId} = this.state;
-    
+
     console.log(timetables);
     const timetable = timetables.find(t => t.coach.coachId === currentCoachId).tables;
-    
+
     return <Timetable timetable={timetable}/>
   }
-  
+
   render() {
     return (
       <Container>

@@ -23,8 +23,8 @@ const fakeGetGym = (gymId) =>
 export const fetchUser = () => async dispatch => {
   const token = localStorage.getItem('authToken');
   api.defaults.headers.common.Authorization = token;
-  // const {data} = await api.get('/auth');
-  const data = await fakeSignIn();
+  const {data} = await api.get('/api/login', {headers: {Authorization: token}});
+  // const data = await fakeSignIn();
 
   return dispatch({
     type: SIGNIN,
@@ -33,16 +33,15 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const signin = (username, password) => async dispatch => {
-  const token = await api.get('/auth', {params: {username, password}});
-  // const token = `${username}+${password}`;
-  localStorage.setItem('authToken', token);
+  const {data: {access_token}} = await api.get('/oauth/token', {params: {username, password}});
+  localStorage.setItem('authToken', access_token);
   await dispatch(fetchUser());
 };
 
 export const signup = (params) => async dispatch => {
   console.log('params', params);
-  // await api.get('/createClient', {params});
-  await dispatch(signin(params.username, params.password));
+  await api.post('/api/signin', {...params});
+  await dispatch(signin(params.email, params.password));
 };
 
 

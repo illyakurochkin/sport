@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchCoaches} from '../../../redux/actions/coachesActions';
-import {fetchGyms} from '../../../redux/actions/gymsActions';
+import {fetchCoaches} from '../../redux/actions/coachesActions';
+import {fetchGyms} from '../../redux/actions/gymsActions';
 import {Search} from 'semantic-ui-react';
 import _ from 'lodash';
 
@@ -14,10 +14,10 @@ const initialState = {
 
 class SearchDropdown extends Component {
   state = initialState;
-  
+
   componentDidMount() {
     const {type, fetchCoaches, fetchGyms, client, coach, gym} = this.props;
-    
+
     switch (type) {
       case 'coach':
         return fetchCoaches({
@@ -31,35 +31,35 @@ class SearchDropdown extends Component {
         });
     }
   }
-  
+
   handleResultSelect = (e, result) => {
     console.log('e', e);
     console.log('result', result);
-    
+
     this.setState({value: result.result.title})
     this.props.onSelect(result.result);
   };
-  
+
   handleSearchChange = (e, {value}) => {
     const {source} = this.props;
     this.setState({loading: true, value});
-    
+
     setTimeout(() => {
       if (this.state.value.length < 1) return this.setState(initialState);
-      
+
       const re = new RegExp(_.escapeRegExp(this.state.value), 'i');
       const isMatch = result => re.test(result.title);
-      
+
       this.setState({
         loading: false,
         results: _.filter(source, isMatch)
       })
     }, 300)
   };
-  
+
   render() {
     const {loading, results, value} = this.state;
-    
+
     return (
       <Search
         loading={loading}
@@ -84,17 +84,17 @@ SearchDropdown.propTypes = {
 
 const mapStateToProps = ({coaches, gyms, user}, {type}) => {
   let source = null;
-  
+
   if (type === 'coach') {
     source = coaches && coaches.map(({photo, sportRang, phone = '', email = '', name, payment, ...rest}) => ({
       title: name,
       description: `${phone} ${email}`,
       image: photo,
       price: payment + ' UAH',
-      
+
       photo, sportRang, phone, email, name, payment, rest
     })) || [];
-    
+
   } else if (type === 'gym') {
     source = gyms && gyms.map(gym => ({
       title: gym.address,
@@ -103,7 +103,7 @@ const mapStateToProps = ({coaches, gyms, user}, {type}) => {
       ...gym
     })) || [];
   }
-  
+
   return {
     source,
     clientId: _.get(user, 'userData.clientId')

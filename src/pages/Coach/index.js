@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import MainCoachInfo from './components/MainCoachInfo';
+import MainCoachInfo from './MainCoachInfo';
 import api from '../../utils/api';
 import {withRouter} from 'react-router';
 
@@ -16,7 +16,7 @@ class Coach extends Component {
 
     console.log('coachId', this.props.location);
 
-    api.get('/coach', {params: {id: coachId}})
+    api.get(`/api/coaches/${coachId}`)
     .then(response => this.setState({coach: response.data.coach, timetables: response.data.gyms}));
 
   }

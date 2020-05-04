@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {Header, Item} from 'semantic-ui-react';
-import GymCard from './components/GymCard';
+import GymCard from './GymCard';
 import Search from '../components/Search';
 import {fetchGyms} from '../../redux/actions/gymsActions';
 import _ from 'lodash';

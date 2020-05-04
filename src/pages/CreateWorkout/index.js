@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 import {connect} from 'react-redux';
 import {Button, Header, Icon} from 'semantic-ui-react';
-import SearchDropdown from './components/SearchDropdown';
-import CoachCard from '../Coaches/components/CoachCard';
-import GymCard from '../Gyms/components/GymCard';
+import SearchDropdown from './SearchDropdown';
+import CoachCard from '../Coaches/CoachCard';
+import GymCard from '../Gyms/GymCard';
 import TimeRangePicker from '@wojtekmaj/react-timerange-picker';
 import Datepicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -88,7 +88,6 @@ class CreateWorkout extends Component {
   renderCoachList(coaches) {
     const {coach} = this.state;
 
-
     return coaches.map(c => (
       <CoachName
         selected={coach && coach.coachId === c.coachId}
@@ -100,9 +99,6 @@ class CreateWorkout extends Component {
 
   renderCoachStep(n) {
     const {coach, coaches, loading} = this.state;
-    console.log('coach', this.state);
-    console.log('renderCoach step Q)(*#$)(#@*$(#@$*@#)$*#)@$*&#@');
-    console.log('state', this.state);
 
     return (
       <StepContainer>
@@ -183,7 +179,6 @@ class CreateWorkout extends Component {
   }
 
   onWithCoachClick = () => {
-    console.log('on with coach click');
     const {gym, date, time} = this.state;
 
     if (!(date && time && gym)) {
@@ -203,20 +198,18 @@ class CreateWorkout extends Component {
     this.setState({withCoach});
 
     if (withCoach) {
-      console.log('with coach');
       const [start, end] = time;
 
       this.setState({loading: true});
 
-      api.get(`/availableCoaches`, {
+      api.get(`/api/gyms/${gym.gymId}/coaches`, {
         params: {
-          gymId: gym.gymId,
           date: dateString,
           startTime: start + ':00',
           endTime: end + ':00'
         }
       })
-      .then(response => this.setState({loading: false, coaches: response.data}));
+      .then(({data}) => this.setState({loading: false, coaches: data}));
     }
   };
 
@@ -236,19 +229,18 @@ class CreateWorkout extends Component {
     const dateString = `${year}.${m}.${d} ${time[0].toString()}:00`;
     //const dateString = `${d}.${m}.${year}`;
 
-    api.get('/workout', {params:{
+    api.post('/api/workouts', {params:{
       gymId: gym.gymId,
       dateStart: dateString,
       startTime: time[0].toString() + ':00',
       endTime: time[1].toString() + ':00',
       coachId: coach && coach.coachId
-    }}).then(response => history.push('/workouts'));
+    }}).then(() => history.push('/workouts'));
 
   };
 
   render() {
     const {withCoach, loading, coaches} = this.state;
-    console.log('---state---', this.state);
 
     return (
       <div>
@@ -259,7 +251,7 @@ class CreateWorkout extends Component {
           <ButtonContainer>
             <Button
               color={withCoach && 'green'}
-              onClick={() => console.log('hello world') || this.onWithCoachClick()}
+              onClick={this.onWithCoachClick}
             >With Coach</Button>
           </ButtonContainer>
           {withCoach && !loading && coaches && coaches.length && this.renderCoachStep(3)}
@@ -272,11 +264,7 @@ class CreateWorkout extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    client: state.user,
-  };
-};
+const mapStateToProps = (state) => ({client: state.user});
 
 const Connected = connect(mapStateToProps)(CreateWorkout);
 
