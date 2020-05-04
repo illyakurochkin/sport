@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import Signin from './pages/Signin';
 import {fetchUser} from './redux/actions/userActions';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import Home from './pages/Home';
 import Workouts from './pages/Workouts';
 import EquipmentList from './pages/EquipmentList';
 import Coach from './pages/Coach';
