@@ -73,7 +73,7 @@ class MainGymInfo extends Component {
       <Container>
         <Header as="h1">{gym.address}</Header>
         <Images {...settings}>
-          {gym.gymPhotos.map(photo => <div key={photo}><Image src={photo}/></div>)}
+          {gym.gymPhotos.map(photo => <div key={photo.photoUrl}><Image src={photo.photoUrl}/></div>)}
         </Images>
         <p>{gym.description}</p>
         <FlexContainer>

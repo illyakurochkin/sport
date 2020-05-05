@@ -20,15 +20,15 @@ class SearchDropdown extends Component {
 
     switch (type) {
       case 'coach':
-        return fetchCoaches({
+        return fetchCoaches(/*{
           clientId: _.get(client, 'clientId'),
           gymId: _.get(gym, 'gymId')
-        });
+        }*/);
       case 'gym':
-        return fetchGyms({
+        return fetchGyms(/*{
           clientId: _.get(client, 'clientId'),
           coachId: _.get(coach, 'coachId')
-        });
+        }*/);
     }
   }
 
@@ -99,7 +99,7 @@ const mapStateToProps = ({coaches, gyms, user}, {type}) => {
     source = gyms && gyms.map(gym => ({
       title: gym.address,
       description: `${gym.description}\n${gym.phone || ''} ${gym.email || ''}`,
-      image: gym.gymPhotos[0],
+      image: gym.gymPhotos[0].photoUrl,
       ...gym
     })) || [];
   }

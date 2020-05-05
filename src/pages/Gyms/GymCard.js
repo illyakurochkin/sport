@@ -7,7 +7,7 @@ class GymCard extends Component {
 
     return (
       <Item onClick={onClick}>
-        <Item.Image onClick={onClick} size="medium" src={gym.gymPhotos[0]}/>
+        <Item.Image onClick={onClick} size="medium" src={gym.gymPhotos[0].photoUrl}/>
         <Item.Content>
           <Item.Header><a style={{cursor: 'pointer'}} onClick={onClick}>{gym.address}</a></Item.Header>
           <Item.Description>
