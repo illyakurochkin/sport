@@ -44,7 +44,7 @@ export const signin = (username, password) => async dispatch => {
 };
 
 export const signup = (params) => async dispatch => {
-  await api.post('/api/signin', {}, {params});
+  await api.post('/api/signin', {}, {params, headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'}});
   await dispatch(signin(params.email, params.password));
 };
 
