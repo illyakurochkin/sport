@@ -33,11 +33,12 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const signin = (username, password) => async dispatch => {
-  const {data: {access_token}} = await api.post('/oauth/token', {
-    grant_type: 'password',
-    username,
-    password,
-  }, {headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'}});
+  const formData = new FormData();
+  formData.set('grant_type', 'password');
+  formData.set('username', username);
+  formData.set('password', password);
+
+  const {data: {access_token}} = await api.post('/oauth/token', formData, {headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'}});
   localStorage.setItem('authToken', access_token);
   await dispatch(fetchUser());
 };
