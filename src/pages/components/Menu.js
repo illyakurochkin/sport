@@ -87,7 +87,7 @@ class Menu extends Component {
     const {user} = this.props;
 
     if(user.coach) {
-      return `${user.coach.lastName} ${user.coach.firstName} ${user.coach.middlename}`;
+      return `${user.coach.lastname} ${user.coach.firstname} ${user.coach.middlename}`;
     }
 
     if(user.gym) {
@@ -95,7 +95,7 @@ class Menu extends Component {
     }
 
     if(user.client) {
-      return `${user.client.lastName} ${user.client.firstName} ${user.client.middlename}`;
+      return `${user.client.lastname} ${user.client.firstname} ${user.client.middlename}`;
     }
 
     return '###';
