@@ -36,6 +36,8 @@ const Signin = ({handleSubmit, history}) => {
   const dispatch = useDispatch();
 
   const onSubmit = ({email, password}) => {
+    console.log('email', email);
+    console.log('password', password);
     return dispatch(signin(email, password))
       .then(() => history.push('/home'));
   };
