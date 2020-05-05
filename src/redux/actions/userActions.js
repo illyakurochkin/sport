@@ -34,8 +34,9 @@ export const fetchUser = () => async dispatch => {
 
 export const signin = (username, password) => async dispatch => {
   const {data: {access_token}} = await api.get('/oauth/token', {
-    headers: {Authorization: 'Base Z3ltLXZpZXc6c2VjcmV0'},
-    params: {
+    headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'},
+    data: {
+      grand_type: 'password',
       username,
       password,
     }
