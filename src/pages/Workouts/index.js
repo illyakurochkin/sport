@@ -7,15 +7,19 @@ import {withRouter} from 'react-router-dom';
 
 class Workouts extends Component {
   componentDidMount() {
-    const {user: {userType, userData}} = this.props;
+    const {user: {/*authorities: [{authority: userType}], */coach, client}} = this.props;
+
+    const userData = coach || client;
+
+    const userType = coach ? 'COACH' : 'CLIENT';
 
     const filter = {};
 
-    if (userType === 'client') {
+    if (userType === 'CLIENT') {
       filter.clientId = userData.clientId
     } else if (userType === 'manager') {
       filter.gymId = userData.gymId;
-    } else if (userType === 'coach') {
+    } else if (userType === 'COACH') {
       filter.coachId = userData.coachId;
     }
 
@@ -31,12 +35,12 @@ class Workouts extends Component {
   }
 
   render() {
-    const {history, user} = this.props;
+    const {history, user: {client}} = this.props;
 
     return (
       <div>
         <Header as="h1">Workouts</Header>
-        {user.userType === 'client' &&
+        {client &&
         <Button primary onClick={() => history.push('/create-workout')}>Create Workout</Button>}
         {this.renderWorkouts()}
       </div>

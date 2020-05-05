@@ -99,7 +99,7 @@ const mapStateToProps = ({coaches, gyms, user}, {type}) => {
     source = gyms && gyms.map(gym => ({
       title: gym.address,
       description: `${gym.description}\n${gym.phone || ''} ${gym.email || ''}`,
-      image: gym.photos[0],
+      image: gym.gymPhotos[0],
       ...gym
     })) || [];
   }

@@ -52,7 +52,7 @@ class WorkoutCard extends Component {
       return;
     }
 
-    if (userType === 'coach') {
+    if (userType === 'COACH') {
       return history.push('/home');
     }
 
@@ -73,7 +73,7 @@ class WorkoutCard extends Component {
 
   goToClient = () => {
     const {workout, userType, history} = this.props;
-    if (userType === 'client') {
+    if (userType === 'CLIENT') {
       return history.push('/home');
     }
 
@@ -112,7 +112,7 @@ WorkoutCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  userType: state.user.userType,
+  userType: state.user.client ? 'CLIENT' : 'COACH',
 });
 
 const Connected = connect(mapStateToProps)(WorkoutCard);

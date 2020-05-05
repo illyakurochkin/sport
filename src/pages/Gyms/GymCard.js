@@ -4,10 +4,10 @@ import {Icon, Item} from 'semantic-ui-react';
 class GymCard extends Component {
   render() {
     const {gym, onClick} = this.props;
-    
+
     return (
       <Item onClick={onClick}>
-        <Item.Image onClick={onClick} size="medium" src={gym.photos[0]}/>
+        <Item.Image onClick={onClick} size="medium" src={gym.gymPhotos[0]}/>
         <Item.Content>
           <Item.Header><a style={{cursor: 'pointer'}} onClick={onClick}>{gym.address}</a></Item.Header>
           <Item.Description>

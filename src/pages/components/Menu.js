@@ -56,14 +56,13 @@ class Menu extends Component {
   onSignout = () => this.props.signout();
 
   renderMenuItems() {
-    const {user: {authorities: [{authority: userType}]}, location: {pathname}} = this.props;
+    const {user: {/*authorities: [{authority: userType}],*/ coach, client}, location: {pathname}} = this.props;
+
+    const userType = coach ? 'COACH' : 'CLIENT';
 
     return (
       <SemanticMenuContainer>
         <SemanticMenu secondary vertical>
-          <Link to="/home">
-            <SemanticMenu.Item name="home" active={pathname === '/home'}/>
-          </Link>
           <Link to="/workouts">
             <SemanticMenu.Item name="workouts" active={pathname === '/workouts' || pathname === '/create-workout'}/>
           </Link>
@@ -108,7 +107,7 @@ class Menu extends Component {
     return (
       <AuthContainer>
         <AuthInfo>
-          <UserType>{user.authorities[0].authority}</UserType>
+          <UserType>{user.client ? 'CLIENT' : 'COACH'}</UserType>
           <p>{this.getName()}</p>
         </AuthInfo>
         <AuthButton
