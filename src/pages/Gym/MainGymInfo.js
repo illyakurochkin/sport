@@ -67,6 +67,7 @@ class MainGymInfo extends Component {
 
   render() {
     const {gym, timetables} = this.props;
+    console.log('this.props', this.props);
 
     return (
       <Container>

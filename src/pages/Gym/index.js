@@ -22,6 +22,7 @@ class Gym extends Component {
 
   render() {
     const {gym, timetables} = this.state;
+    console.log('this.state', this.state);
 
     if (!gym) {
       return null;
