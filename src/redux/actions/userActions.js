@@ -34,13 +34,10 @@ export const fetchUser = () => async dispatch => {
 
 export const signin = (username, password) => async dispatch => {
   const {data: {access_token}} = await api.post('/oauth/token', {
-    headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'},
-    data: {
-      grand_type: 'password',
-      username,
-      password,
-    }
-  });
+    grand_type: 'password',
+    username,
+    password,
+  }, {headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'}});
   localStorage.setItem('authToken', access_token);
   await dispatch(fetchUser());
 };
