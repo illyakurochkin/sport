@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Button, Form, Header} from 'semantic-ui-react';
 import {signin} from '../../redux/actions/userActions';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
-import {Field, reduxForm} from 'redux-form';
+import {Field, formValueSelector, reduxForm} from 'redux-form';
 
 const Container = styled.div`
   margin: 60px auto;
@@ -32,13 +32,17 @@ const StyledButton = styled(Button)`
 
 const input = styled.input``;
 
+const TextField = (props) => {
+  console.log('props.value', props);
+  return (
+    <input {...props.input} {...props} />
+  );
+};
+
 const Signin = ({handleSubmit, history}) => {
   const dispatch = useDispatch();
 
-  const onSubmit = (obj) => {
-    console.log('obj', obj);
-
-    const {email, password} = obj;
+  const onSubmit = ({email, password}) => {
     console.log('email', email);
     console.log('password', password);
     return dispatch(signin(email, password))
@@ -48,26 +52,28 @@ const Signin = ({handleSubmit, history}) => {
   return (
     <Container>
       <Header as="h1">Sign In</Header>
-      <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <Form.Field>
-          <label>Username</label>
-          <Field name="email" placeholder='username' component={input}/>
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <Field name="password" type="password" placeholder='******' component={input}/>
-        </Form.Field>
-        <ButtonContainer>
-          <StyledButton primary type='submit'>Submit</StyledButton>
-        </ButtonContainer>
-        <p align="center">
-          {'Don\'t have an account? '}
-          <Link
-            to="/signup"
-            color="primary"
-            style={{textDecoration: 'underline', cursor: 'pointer'}}
-          >Sign Up</Link></p>
-      </StyledForm>
+      <form  onSubmit={handleSubmit(onSubmit)}>
+        <StyledForm>
+          <Form.Field>
+            <label>Username</label>
+            <Field name="email" placeholder='username' component={TextField} />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <Field name="password" type="password" placeholder='******' component={TextField}/>
+          </Form.Field>
+          <ButtonContainer>
+            <StyledButton primary type='submit'>Submit</StyledButton>
+          </ButtonContainer>
+          <p align="center">
+            {'Don\'t have an account? '}
+            <Link
+              to="/signup"
+              color="primary"
+              style={{textDecoration: 'underline', cursor: 'pointer'}}
+            >Sign Up</Link></p>
+        </StyledForm>
+      </form>
     </Container>
   );
 };

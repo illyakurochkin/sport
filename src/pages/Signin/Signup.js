@@ -36,6 +36,13 @@ const Divider = styled.div`
 
 const input = styled.input``;
 
+const TextField = (props) => {
+  console.log('props.value', props);
+  return (
+    <input {...props.input} {...props} />
+  );
+};
+
 const Signup = ({handleSubmit, history}) => {
   const dispatch = useDispatch();
   const onSubmit = (params) => dispatch(signup(params));
@@ -47,12 +54,12 @@ const Signup = ({handleSubmit, history}) => {
 
         <Form.Field>
           <label>Email</label>
-          <Field name="email" type="email" placeholder="example@gmail.com" component={input}/>
+          <Field name="email" type="email" placeholder="example@gmail.com" component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Password</label>
-          <Field name="password" type="password" placeholder='******' component={input}/>
+          <Field name="password" type="password" placeholder='******' component={TextField}/>
         </Form.Field>
 
         <Divider/>
@@ -60,32 +67,32 @@ const Signup = ({handleSubmit, history}) => {
 
         <Form.Field>
           <label>First name</label>
-          <Field name="firstName" type="text" placeholder="Vasyl" component={input}/>
+          <Field name="firstName" type="text" placeholder="Vasyl" component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Last name</label>
-          <Field name="lastName" type="text" placeholder="Petrenko" component={input}/>
+          <Field name="lastName" type="text" placeholder="Petrenko" component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Middle name</label>
-          <Field name="middleName" type="text" placeholder="Bogdanovych" component={input}/>
+          <Field name="middleName" type="text" placeholder="Bogdanovych" component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Birth date</label>
-          <Field name="birthDate" type="text" placeholder='yyyy-mm-dd' component={input}/>
+          <Field name="birthDate" type="text" placeholder='yyyy-mm-dd' component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Phone</label>
-          <Field name="phone" type="text" placeholder='0684452759' component={input}/>
+          <Field name="phone" type="text" placeholder='0684452759' component={TextField}/>
         </Form.Field>
 
         <Form.Field>
           <label>Photo url</label>
-          <Field name="photo" type="text" placeholder='https://photos.com/image.jpg' component={input}/>
+          <Field name="photo" type="text" placeholder='https://photos.com/image.jpg' component={TextField}/>
         </Form.Field>
 
         <ButtonContainer>
