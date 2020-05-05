@@ -86,13 +86,13 @@ const mapStateToProps = ({coaches, gyms, user}, {type}) => {
   let source = null;
 
   if (type === 'coach') {
-    source = coaches && coaches.map(({photo, sportRang, phone = '', email = '', name, payment, ...rest}) => ({
+    source = coaches && coaches.map(({photoUrl, sportRang, phone = '', email = '', name, payment, ...rest}) => ({
       title: name,
       description: `${phone} ${email}`,
-      image: photo,
+      image: photoUrl,
       price: payment + ' UAH',
 
-      photo, sportRang, phone, email, name, payment, rest
+      photoUrl, sportRang, phone, email, name, payment, rest
     })) || [];
 
   } else if (type === 'gym') {

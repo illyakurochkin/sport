@@ -23,16 +23,16 @@ const FlexContainer = styled.div`
 `;
 
 class MainCoachInfo extends Component {
-  
-  
+
+
   render() {
     const {coach, timetables} = this.props;
-    
+
     return (
       <Container>
         <FlexContainer>
           <div>
-            <StyledImage size="medium" src={coach.photo}/>
+            <StyledImage size="medium" src={coach.photoUrl}/>
           </div>
           <div>
             <StyledHeader as="h1">{coach.name}</StyledHeader>

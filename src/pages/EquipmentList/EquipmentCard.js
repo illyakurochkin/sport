@@ -19,10 +19,10 @@ const Photo = styled(Image).attrs({size: 'small'})`
 class EquipmentCard extends Component {
   render() {
     const {equipment} = this.props;
-    
+
     return (
       <Container>
-        <Photo src={equipment.photo}/>
+        <Photo src={equipment.photoUrl}/>
         <div>
           <p>
             {'name: '}
