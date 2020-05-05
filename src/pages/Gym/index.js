@@ -13,7 +13,7 @@ class Gym extends Component {
     const {location: {pathname}} = this.props;
     const gymId = pathname.substring('/gyms/'.length);
 
-    api.get(`/api/gyms`, {params: {id: gymId}})
+    api.get(`/api/gyms/${gymId}`)
       .then(response => this.setState({
         gym: response.data,
         timetables: response.data.timetables,
