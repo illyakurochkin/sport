@@ -97,7 +97,7 @@ const mapStateToProps = ({coaches, gyms, user}, {type}) => {
 
   } else if (type === 'gym') {
     source = gyms && gyms.map(gym => ({
-      title: gym.address,
+      title: gym.street,
       description: `${gym.description}\n${gym.phone || ''} ${gym.email || ''}`,
       image: gym.gymPhotos[0].photoUrl,
       ...gym
