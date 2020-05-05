@@ -34,7 +34,7 @@ export const fetchUser = () => async dispatch => {
 
 export const signin = (username, password) => async dispatch => {
   const {data: {access_token}} = await api.post('/oauth/token', {
-    grand_type: 'password',
+    grant_type: 'password',
     username,
     password,
   }, {headers: {Authorization: 'Basic Z3ltLXZpZXc6c2VjcmV0'}});

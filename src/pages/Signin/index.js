@@ -35,8 +35,8 @@ const input = styled.input``;
 const Signin = ({handleSubmit, history}) => {
   const dispatch = useDispatch();
 
-  const onSubmit = ({username, password}) => {
-    dispatch(signin(username, password))
+  const onSubmit = ({email, password}) => {
+    return dispatch(signin(email, password))
       .then(() => history.push('/home'));
   };
 
@@ -46,7 +46,7 @@ const Signin = ({handleSubmit, history}) => {
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <label>Username</label>
-          <Field name="username" placeholder='username' component={input}/>
+          <Field name="email" placeholder='username' component={input}/>
         </Form.Field>
         <Form.Field>
           <label>Password</label>
