@@ -23,7 +23,7 @@ const fakeGetGym = (gymId) =>
 export const fetchUser = () => async dispatch => {
   const token = localStorage.getItem('authToken');
   api.defaults.headers.common.Authorization = 'Bearer ' + token;
-  const {data} = await api.get('/api/login', {headers: {Authorization: token}});
+  const {data} = await api.get('/api/login');
   // const data = await fakeSignIn();
 
   return dispatch({
