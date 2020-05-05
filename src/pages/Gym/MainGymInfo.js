@@ -59,7 +59,7 @@ class MainGymInfo extends Component {
         contentLabel="Example modal"
       >
         <Header as="h2">Equipment</Header>
-        {gym.equipment.map(e => <EquipmentCard equipment={e}/>)}
+        {gym.equipmentList.map(e => <EquipmentCard equipment={e}/>)}
       </Modal>
     )
   }
