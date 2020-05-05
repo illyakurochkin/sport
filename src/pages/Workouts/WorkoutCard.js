@@ -53,7 +53,7 @@ class WorkoutCard extends Component {
     }
 
     if (userType === 'COACH') {
-      return history.push('/home');
+      return history.push('/gyms');
     }
 
     return history.push(`/coaches/${workout.coach.coachId}`);
@@ -63,7 +63,7 @@ class WorkoutCard extends Component {
     const {workout, userType, history} = this.props;
 
     if (userType === 'manager') {
-      return history.push('/home');
+      return history.push('/gyms');
     }
 
     console.log('go to gym', workout.gym);
@@ -74,7 +74,7 @@ class WorkoutCard extends Component {
   goToClient = () => {
     const {workout, userType, history} = this.props;
     if (userType === 'CLIENT') {
-      return history.push('/home');
+      return history.push('/gyms');
     }
 
     return history.push(`/clients/${workout.client.clientId}`);

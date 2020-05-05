@@ -46,7 +46,7 @@ const Signin = ({handleSubmit, history}) => {
     console.log('email', email);
     console.log('password', password);
     return dispatch(signin(email, password))
-      .then(() => history.push('/home'));
+      .then(() => history.push('/gyms'));
   };
 
   return (
